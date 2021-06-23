@@ -1,0 +1,80 @@
+{% extends "layouts.html" %}
+
+{% block content %} 
+
+{% include '_menssagem.html'%}
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Crypto$tore</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/marcas">Marcas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categoria">Categoria</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="/addproduto">Adicionar Produto</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="/addmarca">Adicionar Marca</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/addcat">Adicionar Categoria</a>
+            </li>             
+        </div>
+      </div>
+    </nav>
+</div>
+
+
+<div class="container mt-3" style="background-color: white;" >
+    <table class="table table-sm table-striped">
+        <thead>
+            <th>Serial</th>
+            <th>Produto</th>
+            <th>Preço</th>
+            <th>Desconto</th>
+            <th>Fabricante</th>
+            <th>Categoria</th>
+            <th>Stock</th>
+            <th>Foto</th>
+            <th>Editar</th>
+            <th>Deletar</th>
+            
+            
+        </thead>
+
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{produto.name}}</td>
+                <td>{{produto.preco }}</td>
+                <td>{{produto.discount}}%</td>
+                <td>{{produto.marca.name}}</td>
+                <td>{{produto.categoria.name}}</td>
+                <td>{{produto.stock}}</td>
+                <td><img src="{{url_for('static', filename='images/' + produto.imagem_1)}}" width="150" height="90"></td>
+                <td><a href="{{url_for('updateproduto',id=produto.id)}}" class="btn btn-success btn-sm">Editar</a></td> 
+                <td>Deletar</td>
+                
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+
+{% endblock content %} 

@@ -1,0 +1,91 @@
+{% extends 'layouts.html' %}
+
+{% block content %} 
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Crypto$tore</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/marcas">Marcas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/categoria">Categoria</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="/addproduto">Adicionar Produto</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="/addmarca">Adicionar Marca</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/addcat">Adicionar Categoria</a>
+              </li>             
+          </div>
+        </div>
+      </nav>
+  </div>
+{% include '_menssagem.html'%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 p-3">
+            <h2 class="text-center bg-success p-2">Atualizar Produto</h2>
+            {% from "formularioajuda.html" import render_field %}
+            <form action="" method="POST" enctype="multipart/form-data">
+
+                {{ render_field(form.name, class="form-control", placeholder="Nome do produto")}}
+                {{ render_field(form.preco, class="form-control", placeholder="Preco do produto")}}
+                {{ render_field(form.discount, class="form-control", placeholder="Disconto do produto")}}
+                {{ render_field(form.stock, class="form-control", placeholder="Estoque de pordutos")}}
+
+                <label for="marca"> Adicione uma Marca</label>
+                <select name="marca" id="marca" class="form-control" required>
+                    <option value="{{produto.marca_id}}">{{produto.marca.name}}</option>
+                    {% for marca in marcas %}
+                    <option value="{{marca.id}}">{{marca.name}}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="categoria"> Adicione uma categoria</label>
+                <select name="categoria" id="categoria" class="form-control" required>
+                    <option value="{{produto.categoria_id}}">{{produto.categoria.name}}</option>
+                    {% for categoria in categorias %}
+                    <option value="{{categoria.id}}">{{categoria.name}}</option>
+                    {% endfor %}
+                </select>
+
+
+                {{ render_field(form.colors, class="form-control", placeholder="Cor da imagem")}}
+                {{ render_field(form.discription, class="form-control", placeholder="Descricao do produto", rows="20")}}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="file" name="imagem_1" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="file" name="imagem_2" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="file" name="imagem_3" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-outline-info mt-4 mb-5"> Atualizar</button>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+
+{% endblock content %} 
